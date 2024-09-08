@@ -3,6 +3,7 @@ from selenium import webdriver
 
 from ActionPage.Actionspage import LoginActionsPage, ViewCartActionsPage, CheckOutActionsPage, \
     CheckOutInformationActionsPage, FinishedIconActionsPage, HomeIconActionsPage, AddToCartActionsPage
+from Config.config import Config
 
 
 @pytest.fixture(scope="module")
@@ -18,13 +19,13 @@ def driver_setup():
 def login(driver_setup):
     driver = driver_setup
     login_page = LoginActionsPage(driver)  # call the login class
-    login_page.open_url("https://www.saucedemo.com/")  # call the url
+    login_page.open_url(Config.BASE_URL)  # call the url
     return login_page
 
 
 def test_login_page_on_sauce_demo_website(login):
-    login.enter_username("standard_user")
-    login.enter_password("secret_sauce")
+    login.enter_username(Config.USERNAME)
+    login.enter_password(Config.PASSWORD)
     login.click_login_button()
 
 
@@ -50,9 +51,9 @@ def test_checkout_icon(login):
 
 def test_checkout_information_icon(login):
     add_cart = CheckOutInformationActionsPage(login.driver)
-    add_cart.fill_checkout_firstname("jake")
-    add_cart.fill_checkout_lastname("Othniel")
-    add_cart.fill_checkout_zipcode("+234")
+    add_cart.fill_checkout_firstname(Config.FILL_CHECKOUT_FIRSTNAME)
+    add_cart.fill_checkout_lastname(Config.FILL_CHECKOUT_LASTNAME)
+    add_cart.fill_checkout_zipcode(Config.POSTAL_CODE)
     add_cart.click_checkout_confirmation_icon()
 
 
