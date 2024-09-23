@@ -1,5 +1,6 @@
 name: POM_SauceDemo
 
+
 on:
   push:
     branches:
@@ -37,5 +38,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: pytest-report
-            path: report.html
+         name: pytest-report
+          path: report.html
